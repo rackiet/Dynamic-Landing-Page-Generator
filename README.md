@@ -26,7 +26,7 @@ Sebuah sistem sederhana namun powerful untuk menghasilkan landing page dinamis b
 
 1. Clone repositori ini:
    ```
-   git clone https://github.com/username/dynamic-landing-page-generator.git
+   git clone https://github.com/rackiet/dynamic-landing-page-generator.git
    ```
 2. Pastikan server Anda mendukung PHP 7.0 atau lebih tinggi.
 3. Aktifkan modul `mod_rewrite` pada server Apache Anda.
