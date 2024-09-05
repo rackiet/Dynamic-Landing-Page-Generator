@@ -1,7 +1,55 @@
-RewriteEngine On
-RewriteBase /
+# File: .htaccess
 
-# Jika file atau direktori tidak ada, arahkan ke index.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [L,QSA]
+# Aktifkan mesin rewrite
+RewriteEngine On
+
+# Mencegah akses langsung ke file .htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Mencegah directory listing
+Options -Indexes
+
+# Mencegah akses ke file tersembunyi (dimulai dengan titik)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Mencegah akses ke file tertentu
+<FilesMatch "(^#.*#|\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist)|~)$">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+
+# Mengaktifkan proteksi XSS, clickjacking, dan MIME-sniffing
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header always append X-Frame-Options SAMEORIGIN
+    Header set X-Content-Type-Options nosniff
+</IfModule>
+
+# Mematikan server signature
+ServerSignature Off
+
+# Aturan untuk menangani URL dengan format /namafolder/gantibos=katakunci (termasuk multi-kata)
+RewriteRule ^([^/]+)/gantibos=(.+)$ $1/index2.php?keyword=$2 [L,QSA,B]
+
+# Aturan untuk menangani URL /namafolder/ tanpa parameter
+RewriteRule ^([^/]+)/$ $1/index.php [L]
+
+# Memblokir akses langsung ke file PHP kecuali index.php dan index2.php
+RewriteCond %{THE_REQUEST} "^[^ ]* .*?\.php[? ].*$"
+RewriteCond %{REQUEST_FILENAME} !^.*/index2?\.php$
+RewriteRule .* - [F,L]
+
+# Pengalihan khusus untuk halaman 404
+ErrorDocument 404 /404/
+
+# Batasi metode HTTP yang diizinkan
+<LimitExcept GET POST HEAD>
+    deny from all
+</LimitExcept>
