@@ -5,13 +5,17 @@ Proyek ini adalah sistem pengolah URL dinamis yang memungkinkan penanganan kata 
 
 ## 🗂️ Struktur Proyek
 ```
-root/
+contoh.com/
 │
 ├── .htaccess
-├── index.php
-├── index2.php
-├── keyword.txt
-└── README.md
+│
+├── namafolder/
+│   ├── index.php
+│   ├── index2.php
+│   └── keyword.txt
+│
+└── 404/
+    └── index.html (atau index.php)
 ```
 
 ## 🚀 Fitur Utama
