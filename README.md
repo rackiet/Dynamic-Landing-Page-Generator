@@ -1,99 +1,57 @@
-# 🚀 Dynamic Landing Page Generator
+# 🌐 Dynamic URL Processor
 
-Sebuah sistem sederhana namun powerful untuk menghasilkan landing page dinamis berdasarkan kata kunci.
+## 📋 Deskripsi Proyek
+Proyek ini adalah sistem pengolah URL dinamis yang memungkinkan penanganan kata kunci melalui URL khusus. Sistem ini dirancang untuk memberikan respons berbeda berdasarkan kata kunci yang diberikan dalam URL.
 
-## 📋 Daftar Isi
-
-- [🌟 Fitur](#-fitur)
-- [🛠️ Instalasi](#️-instalasi)
-- [📁 Struktur File](#-struktur-file)
-- [🔧 Cara Kerja](#-cara-kerja)
-- [🚀 Penggunaan](#-penggunaan)
-- [🔒 Keamanan](#-keamanan)
-- [✨ Kustomisasi](#-kustomisasi)
-- [🐞 Troubleshooting](#-troubleshooting)
-- [📈 Optimisasi](#-optimisasi)
-- [📝 Lisensi](#-lisensi)
-
-## 🌟 Fitur
-
-- Generasi landing page dinamis berdasarkan kata kunci
-- Proteksi XSS (Cross-Site Scripting)
-- Pencegahan akses langsung ke file sensitif
-- URL yang SEO-friendly
-
-## 🛠️ Instalasi
-
-1. Clone repositori ini:
-   ```
-   git clone https://github.com/rackiet/dynamic-landing-page-generator.git
-   ```
-2. Pastikan server Anda mendukung PHP 7.0 atau lebih tinggi.
-3. Aktifkan modul `mod_rewrite` pada server Apache Anda.
-4. Sesuaikan permission file:
-   ```
-   chmod 644 *.php *.txt .htaccess
-   chmod 755 .
-   ```
-
-## 📁 Struktur File
-
+## 🗂️ Struktur Proyek
 ```
-.
+root/
+│
 ├── .htaccess
 ├── index.php
 ├── index2.php
-└── keyword.txt
+├── keyword.txt
+└── README.md
 ```
 
-## 🔧 Cara Kerja
+## 🚀 Fitur Utama
+- 🔗 Pemrosesan URL dinamis
+- 🔍 Pencocokan kata kunci dari file
+- 🛡️ Pengalihan otomatis ke halaman 404 untuk kata kunci yang tidak valid
+- 🔒 Konfigurasi keamanan tingkat lanjut melalui .htaccess
 
-1. `.htaccess` mengarahkan semua request ke `index.php`.
-2. `index.php` memproses request, membaca `keyword.txt`, dan mencocokkan URL dengan kata kunci.
-3. Jika cocok, `index2.php` dijalankan untuk menghasilkan landing page.
-4. Jika tidak cocok, error 404 ditampilkan.
+## 🛠️ Cara Penggunaan
+1. Pastikan server web Anda mendukung file .htaccess dan mod_rewrite diaktifkan.
+2. Tempatkan semua file di direktori root web Anda.
+3. Sesuaikan isi file `keyword.txt` dengan daftar kata kunci yang diinginkan.
+4. Akses situs dengan format URL: `http://yourdomain.com/foldername/gantibos=keyword`
 
-## 🚀 Penggunaan
+### 📝 Contoh URL
+- `http://yourdomain.com/foldername/` - Menampilkan halaman index.php
+- `http://yourdomain.com/foldername/gantibos=kesehatan` - Memproses kata kunci "kesehatan"
+- `http://yourdomain.com/foldername/gantibos=kesehatan%20mental` - Memproses kata kunci "kesehatan mental"
 
-1. Edit `keyword.txt`, tambahkan kata kunci Anda (satu per baris).
-2. Akses situs Anda: `http://domain-anda.com/kata-kunci`
-3. Landing page dinamis akan ditampilkan untuk kata kunci yang cocok.
+## 🔐 Fitur Keamanan
+- ⚔️ Pencegahan directory listing
+- 🚫 Pembatasan akses ke file sensitif
+- 🛡️ Proteksi terhadap XSS, clickjacking, dan MIME-sniffing
+- 🔒 Pembatasan metode HTTP yang diizinkan
 
-## 🔒 Keamanan
+## ⚙️ Konfigurasi
+- Tambahkan kata kunci baru ke `keyword.txt`, satu kata kunci per baris.
+- Sesuaikan tampilan halaman sukses di `index2.php` sesuai kebutuhan.
+- Pastikan Anda memiliki halaman 404 kustom di `/404/` untuk penanganan error.
 
-Sistem ini menerapkan beberapa langkah keamanan:
+## 📌 Catatan Penting
+- Selalu uji konfigurasi baru di lingkungan pengembangan sebelum menerapkannya di produksi.
+- Pastikan semua modul Apache yang diperlukan (seperti mod_headers) diaktifkan di server Anda.
 
-- Sanitasi input untuk mencegah XSS
-- Pembersihan kata kunci dari karakter berbahaya
-- Pencegahan akses langsung ke `index2.php`
-- Validasi path untuk mencegah directory traversal
+## 🤝 Kontribusi
+Kontribusi untuk meningkatkan proyek ini sangat diterima. Silakan buat pull request atau buka issue untuk saran dan perbaikan.
 
-Namun, selalu lakukan audit keamanan secara berkala.
-
-## ✨ Kustomisasi
-
-- Edit `index2.php` untuk mengubah tampilan landing page.
-- Modifikasi CSS dalam `<style>` tag di `index2.php` untuk styling kustom.
-- Tambahkan logika PHP di `index2.php` untuk konten dinamis lebih lanjut.
-
-## 🐞 Troubleshooting
-
-- **Error 404 untuk Semua Halaman**: Periksa konfigurasi `.htaccess` dan `mod_rewrite`.
-- **Kata Kunci Tidak Bekerja**: Pastikan format `keyword.txt` benar dan file dapat dibaca.
-- **Masalah Keamanan**: Jalankan scan keamanan dan perbarui sistem secara teratur.
-
-## 📈 Optimisasi
-
-- Implementasikan caching untuk `keyword.txt` untuk performa lebih baik.
-- Minify CSS di `index2.php`.
-- Gunakan CDN untuk aset statis jika ada.
-
-## 📝 Lisensi
-
-Proyek ini dilisensikan di bawah MIT License. Lihat file `LICENSE` untuk detail lengkap.
+## 📄 Lisensi
+Proyek ini dilisensikan di bawah [MIT License].
 
 ---
 
-Dibuat dengan ❤️ oleh [rackiet]
-
-Untuk bantuan lebih lanjut atau melaporkan masalah, silakan buka issue di repositori GitHub ini.
+🌟 Dibuat dengan ❤️ oleh [rackiet]
